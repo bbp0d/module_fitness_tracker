@@ -20,7 +20,7 @@ class InfoMessage:
                 f'Длительность: {self.duration} ч.;'
                 f'Дистанция: {self.distance} км.;'
                 f'Ср. скорость: {self.speed} км/ч;'
-                f'Потрачено ккал: {self.calories}. ')
+                f'Потрачено ккал: {self.calories}.')
 
 
 class Training:
