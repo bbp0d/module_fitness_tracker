@@ -110,9 +110,7 @@ class SportsWalking(Training):
         """Получить количество затраченных калорий."""
         return ((self.COEF_CALORIE_1
                 * self.weight
-                + (self.get_distance()
-                ** self.COEF_CALORIE_2
-                // self.height)
+                + (self.get_distance() ** self.COEF_CALORIE_2 // self.height)
                 * self.COEF_CALORIE_3
                 * self.weight)
                 * self.duration
