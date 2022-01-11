@@ -1,20 +1,16 @@
+from dataclasses import dataclass
 from typing import List
 
 
+@dataclass
 class InfoMessage:
     """Информационное сообщение о тренировке."""
 
-    def __init__(self,
-                 training_type: str,
-                 duration: float,
-                 distance: float,
-                 speed: float,
-                 calories: float) -> None:
-        self.training_type = training_type
-        self.duration_h = duration
-        self.distance = distance
-        self.speed = speed
-        self.calories = calories
+    training_type: str
+    duration_h: float
+    distance: float
+    speed: float
+    calories: float
 
     def get_message(self) -> str:
         """Метод возвращает строку сообщения"""
@@ -50,12 +46,8 @@ class Training():
         return self.get_distance() / self.duration_h
 
     def get_spent_calories(self) -> float:
-        """Получить количество затраченных калорий.
-
-           Указываем PASS т.к. в подклассах необходима
-           своя логика расчета затрат каллорий.
-        """
-        pass
+        """Получить количество затраченных калорий."""
+        raise NotImplementedError
 
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
