@@ -7,7 +7,7 @@ class InfoMessage:
     """Информационное сообщение о тренировке."""
 
     training_type: str
-    duration_h: float
+    duration: float
     distance: float
     speed: float
     calories: float
@@ -15,7 +15,7 @@ class InfoMessage:
     def get_message(self) -> str:
         """Метод возвращает строку сообщения"""
         return (f'Тип тренировки: {self.training_type}; '
-                f'Длительность: {self.duration_h:.3f} ч.; '
+                f'Длительность: {self.duration:.3f} ч.; '
                 f'Дистанция: {self.distance:.3f} км; '
                 f'Ср. скорость: {self.speed:.3f} км/ч; '
                 f'Потрачено ккал: {self.calories:.3f}.')
