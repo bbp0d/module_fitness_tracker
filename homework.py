@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List
+from typing import List, Dict, Type
 
 
 @dataclass
@@ -47,7 +47,7 @@ class Training():
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        raise NotImplementedError
+        raise NotImplementedError('Метод еще не реализован.')
 
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
@@ -64,22 +64,13 @@ class Running(Training):
     COEF_CALORIE_1: int = 18
     COEF_CALORIE_2: int = 20
 
-    def __init__(self,
-                 action: int,
-                 duration: float,
-                 weight: float,
-                 ) -> None:
-        super().__init__(action,
-                         duration,
-                         weight)
-
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
         return ((self.COEF_CALORIE_1
                 * self.get_mean_speed()
                 - self.COEF_CALORIE_2)
                 * self.weight_kg
-                / Training.M_IN_KM
+                / self.M_IN_KM
                 * self.duration_h
                 * self.MIN_IN_HOUR)
 
@@ -137,7 +128,7 @@ class Swimming(Training):
         """Получить среднюю скорость движения."""
         return (self.length_pool
                 * self.count_pool
-                / Training.M_IN_KM
+                / self.M_IN_KM
                 / self.duration_h)
 
     def get_spent_calories(self) -> float:
@@ -150,10 +141,12 @@ class Swimming(Training):
 
 def read_package(workout_type: str, data: List[int]) -> Training:
     """Прочитать данные полученные от датчиков."""
-    from_code_to_type = {'SWM': Swimming,
-                         'RUN': Running,
-                         'WLK': SportsWalking}
-    if workout_type in from_code_to_type:
+    from_code_to_type: Dict[str, Type[Training]] = {'SWM': Swimming,
+                                                    'RUN': Running,
+                                                    'WLK': SportsWalking}
+    if workout_type not in from_code_to_type:
+        raise ValueError('Неверный ключ')
+    else:
         return from_code_to_type[workout_type](*data)
 
 
