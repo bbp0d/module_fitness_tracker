@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Dict, Type
+from typing import Dict, List, Type
 
 
 @dataclass
@@ -146,8 +146,7 @@ def read_package(workout_type: str, data: List[int]) -> Training:
                                                     'WLK': SportsWalking}
     if workout_type not in from_code_to_type:
         raise ValueError('Неверный ключ')
-    else:
-        return from_code_to_type[workout_type](*data)
+    return from_code_to_type[workout_type](*data)
 
 
 def main(training: Training) -> None:
